@@ -37,12 +37,18 @@ func sender(c chan signalData) {
 }
 
 func receiver(c chan signalData) {
+	// handle memory leak cause time.After
+	idleDuration := time.Second * 1
+	idleTimeout := time.NewTimer(idleDuration)
+	defer idleTimeout.Stop()
+
 	for {
+		idleTimeout.Reset(idleDuration)
 		select {
 		case signalData := <-c:
 			signalData.status = validateSignal(signalData.signal)
 			fmt.Println("Receiving Signal ", signalData.signal, " with status ", signalData.status)
-		case <-time.After(time.Second * 1):
+		case <-idleTimeout.C:
 			fmt.Println("Got timeout while receiving the signal")
 			return
 		}
@@ -97,8 +103,8 @@ func evaluateNode(node1, node2 int) int {
 	switch {
 	case node2 > node1:
 		return 1
-	case node2 < node1:
-		return 0
+	case node1 == 1 && node2 == 1:
+		return 1
 	default:
 		return 0
 	}
