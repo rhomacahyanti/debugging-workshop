@@ -56,6 +56,7 @@ func generateSignal() []int {
 		signal = append(signal, randInt(0, 1))
 	}
 
+	fmt.Println(signal)
 	return signal
 }
 
@@ -95,9 +96,9 @@ func evaluateSignal(signal []int) string {
 
 func evaluateNode(node1, node2 int) int {
 	switch {
-	case node2 > node1:
+	case node2 == 1:
 		return 1
-	case node2 < node1:
+	case node2 == 0:
 		return 0
 	default:
 		return 0
