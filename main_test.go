@@ -22,9 +22,23 @@ func Test_validateSignal(t *testing.T) {
 			want: "good",
 		},
 		{
+			name: "good signal 2",
+			args: args{
+				signal: []int{0, 0, 1, 0, 0, 1},
+			},
+			want: "good",
+		},
+		{
 			name: "bad signal",
 			args: args{
 				signal: []int{0, 0, 1, 0, 0, 0},
+			},
+			want: "bad",
+		},
+		{
+			name: "bad signal 2",
+			args: args{
+				signal: []int{1, 0, 1, 0, 0, 0},
 			},
 			want: "bad",
 		},
@@ -82,7 +96,7 @@ func Test_evaluateNode(t *testing.T) {
 		want int
 	}{
 		{
-			name: "test1",
+			name: "bad when first is greater than last",
 			args: args{
 				node1: 1,
 				node2: 0,
@@ -90,9 +104,25 @@ func Test_evaluateNode(t *testing.T) {
 			want: 0,
 		},
 		{
-			name: "test2",
+			name: "good when first less than last",
 			args: args{
 				node1: 0,
+				node2: 1,
+			},
+			want: 1,
+		},
+		{
+			name: "bad when first and last node is 0",
+			args: args{
+				node1: 0,
+				node2: 0,
+			},
+			want: 0,
+		},
+		{
+			name: "good when first and last node is 1",
+			args: args{
+				node1: 1,
 				node2: 1,
 			},
 			want: 1,
