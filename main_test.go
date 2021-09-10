@@ -61,6 +61,13 @@ func Test_evaluateSignal(t *testing.T) {
 			},
 			want: "bad",
 		},
+		{
+			name: "mixed",
+			args: args{
+				signal: []int{0, 1, 1, 1, 1, 1},
+			},
+			want: "good",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -73,8 +80,9 @@ func Test_evaluateSignal(t *testing.T) {
 
 func Test_evaluateNode(t *testing.T) {
 	type args struct {
-		node1 int
-		node2 int
+		result int
+		node1  int
+		node2  int
 	}
 	tests := []struct {
 		name string
@@ -84,23 +92,43 @@ func Test_evaluateNode(t *testing.T) {
 		{
 			name: "test1",
 			args: args{
-				node1: 1,
-				node2: 0,
+				result: 0,
+				node1:  1,
+				node2:  0,
 			},
 			want: 0,
 		},
 		{
 			name: "test2",
 			args: args{
-				node1: 0,
-				node2: 1,
+				result: 0,
+				node1:  0,
+				node2:  1,
+			},
+			want: 1,
+		},
+		{
+			name: "test3",
+			args: args{
+				result: 1,
+				node1:  0,
+				node2:  0,
+			},
+			want: 1,
+		},
+		{
+			name: "test4",
+			args: args{
+				result: 1,
+				node1:  1,
+				node2:  1,
 			},
 			want: 1,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := evaluateNode(tt.args.node1, tt.args.node2); got != tt.want {
+			if got := evaluateNode(tt.args.result, tt.args.node1, tt.args.node2); got != tt.want {
 				t.Errorf("evaluateNode() = %v, want %v", got, tt.want)
 			}
 		})
