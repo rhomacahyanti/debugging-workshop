@@ -61,6 +61,20 @@ func Test_evaluateSignal(t *testing.T) {
 			},
 			want: "bad",
 		},
+		{
+			name: "bad signal",
+			args: args{
+				signal: []int{1, 0, 0, 0, 0, 0},
+			},
+			want: "bad",
+		},
+		{
+			name: "good signal",
+			args: args{
+				signal: []int{0, 0, 0, 0, 0, 1},
+			},
+			want: "good",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
