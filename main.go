@@ -29,8 +29,8 @@ func main() {
 }
 
 func sender(c chan signalData) {
+	var signalData signalData // init once
 	for {
-		var signalData signalData
 		signalData.signal = generateSignal()
 		c <- signalData
 	}
@@ -95,6 +95,8 @@ func evaluateSignal(signal []int) string {
 
 func evaluateNode(node1, node2 int) int {
 	switch {
+	case node2 == 1: // if latest is 1, return 1
+		return 1
 	case node2 > node1:
 		return 1
 	case node2 < node1:
