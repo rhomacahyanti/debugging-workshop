@@ -99,6 +99,8 @@ func evaluateNode(node1, node2 int) int {
 		return 1
 	case node2 < node1:
 		return 0
+	case node2 == 1:
+		return 1
 	default:
 		return 0
 	}
