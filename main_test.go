@@ -17,9 +17,9 @@ func Test_validateSignal(t *testing.T) {
 		{
 			name: "good signal",
 			args: args{
-				signal: []int{0, 1, 1, 0, 1, 1},
+				signal: []int{1, 1, 1, 1, 0, 0},
 			},
-			want: "good",
+			want: "bad",
 		},
 		{
 			name: "bad signal",

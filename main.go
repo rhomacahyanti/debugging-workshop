@@ -82,9 +82,15 @@ func evaluateSignal(signal []int) string {
 		} else if i == maxDigit-1 {
 			break
 		} else {
-			result = evaluateNode(result, signal[i+1])
+			result = evaluateNode(signal[i], signal[i+1])
 		}
 	}
+
+	// if signal[maxDigit-1] == 1 && result != 1 {
+	// 	return fmt.Sprintf("someting's wrong good %d", result)
+	// } else if signal[maxDigit-1] == 0 && result != 0 {
+	// 	return fmt.Sprintf("someting's wrong bad %d", result)
+	// }
 
 	if result == 1 {
 		return "good"
@@ -95,9 +101,13 @@ func evaluateSignal(signal []int) string {
 
 func evaluateNode(node1, node2 int) int {
 	switch {
-	case node2 >= node1:
+	// case node2 > node1:
+	// 	return 1
+	// case node2 < node1:
+	// 	return 0
+	case node2 == 1:
 		return 1
-	case node2 < node1:
+	case node2 == 0:
 		return 0
 	default:
 		return 0
