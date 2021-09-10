@@ -28,6 +28,20 @@ func Test_validateSignal(t *testing.T) {
 			},
 			want: "bad",
 		},
+		{
+			name: "bad signal 2",
+			args: args{
+				signal: []int{1, 1, 0, 0, 1, 0},
+			},
+			want: "bad",
+		},
+		{
+			name: "good signal 2",
+			args: args{
+				signal: []int{0, 1, 0, 0, 1, 1},
+			},
+			want: "good",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

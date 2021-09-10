@@ -37,12 +37,15 @@ func sender(c chan signalData) {
 }
 
 func receiver(c chan signalData) {
+	// go tool pprof -alloc_space http://localhost:6060/debug/pprof/heap
+	// memory leak caused by repeated NewTimer instantiation. instantiate only once.
+	timeout := time.NewTimer(time.Second)
 	for {
 		select {
 		case signalData := <-c:
 			signalData.status = validateSignal(signalData.signal)
 			fmt.Println("Receiving Signal ", signalData.signal, " with status ", signalData.status)
-		case <-time.After(time.Second * 1):
+		case <-timeout.C:
 			fmt.Println("Got timeout while receiving the signal")
 			return
 		}
@@ -100,7 +103,7 @@ func evaluateNode(node1, node2 int) int {
 	case node2 < node1:
 		return 0
 	default:
-		return 0
+		return 1
 	}
 }
 
