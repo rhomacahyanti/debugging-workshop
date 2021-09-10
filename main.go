@@ -100,7 +100,7 @@ func evaluateNode(node1, node2 int) int {
 	case node2 < node1:
 		return 0
 	default:
-		return 0
+		return node2
 	}
 }
 

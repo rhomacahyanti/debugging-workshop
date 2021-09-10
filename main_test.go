@@ -17,9 +17,23 @@ func Test_validateSignal(t *testing.T) {
 		{
 			name: "good signal",
 			args: args{
+				signal: []int{1, 0, 1, 0, 1, 1},
+			},
+			want: "good",
+		},
+		{
+			name: "good signal",
+			args: args{
 				signal: []int{1, 0, 1, 0, 0, 1},
 			},
 			want: "good",
+		},
+		{
+			name: "bad signal",
+			args: args{
+				signal: []int{0, 0, 1, 0, 1, 0},
+			},
+			want: "bad",
 		},
 		{
 			name: "bad signal",
@@ -50,9 +64,23 @@ func Test_evaluateSignal(t *testing.T) {
 		{
 			name: "good signal",
 			args: args{
+				signal: []int{0, 1, 1, 0, 1, 1},
+			},
+			want: "good",
+		},
+		{
+			name: "good signal",
+			args: args{
 				signal: []int{0, 1, 1, 0, 0, 1},
 			},
 			want: "good",
+		},
+		{
+			name: "bad signal",
+			args: args{
+				signal: []int{1, 0, 1, 1, 1, 0},
+			},
+			want: "bad",
 		},
 		{
 			name: "bad signal",
@@ -65,7 +93,7 @@ func Test_evaluateSignal(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := evaluateSignal(tt.args.signal); got != tt.want {
-				t.Errorf("calculateSignal() = %v, want %v", got, tt.want)
+				t.Errorf("evaluateSignal() = %v, want %v", got, tt.want)
 			}
 		})
 	}
