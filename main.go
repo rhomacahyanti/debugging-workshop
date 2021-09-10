@@ -75,33 +75,10 @@ func validateSignal(signal []int) string {
 }
 
 func evaluateSignal(signal []int) string {
-	var result int
-	for i := range signal {
-		if i == 0 {
-			result = evaluateNode(signal[i], signal[i+1])
-		} else if i == maxDigit-1 {
-			break
-		} else {
-			result = evaluateNode(result, signal[i+1])
-		}
-	}
-
-	if result == 1 {
+	if signal[maxDigit-1] == 1 {
 		return "good"
-	} else {
-		return "bad"
 	}
-}
-
-func evaluateNode(node1, node2 int) int {
-	switch {
-	case node2 > node1:
-		return 1
-	case node2 < node1:
-		return 0
-	default:
-		return 0
-	}
+	return "bad"
 }
 
 func randInt(min int, max int) int {
