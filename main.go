@@ -95,10 +95,8 @@ func evaluateSignal(signal []int) string {
 
 func evaluateNode(node1, node2 int) int {
 	switch {
-	case node2 > node1:
+	case node2 == 1:
 		return 1
-	case node2 < node1:
-		return 0
 	default:
 		return 0
 	}
